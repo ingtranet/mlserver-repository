@@ -12,13 +12,15 @@ class Orion14BChatInt4(MLModel):
         import torch
         from transformers import AutoModelForCausalLM, AutoTokenizer
         from transformers.generation.utils import GenerationConfig
+        from transformers.utils.logging import disable_progress_bar
+        disable_progress_bar()
         self.tokenizer = AutoTokenizer.from_pretrained(self.MODEL_NAME, use_fast=False, trust_remote_code=True)
         self.model = AutoModelForCausalLM.from_pretrained(self.MODEL_NAME, device_map="auto", torch_dtype=torch.float16, trust_remote_code=True)
         self.model.generation_config = GenerationConfig.from_pretrained(self.MODEL_NAME)
         return await super().load()
 
     async def predict(self, payload: types.InferenceRequest) -> types.InferenceResponse:
-        messages = self._extract_json(payload)["messages"]
+        messages = self._parse_request(payload)["messages"]
         response = {
             "assistant": self.model.chat(self.tokenizer, messages, streaming=False)
         }
