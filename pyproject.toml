@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "mlserver-repository"
+version = "0.1.0"
+description = ""
+authors = ["cookieshake <cookieshake.dev@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "~3.11"
+
+
+[tool.poetry.group.dev.dependencies]
+transformers = "^4.38.2"
+mlserver = "^1.4.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
