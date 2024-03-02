@@ -1,0 +1,4 @@
+{
+    "name": "Orion-14B-Chat-Int4",
+    "implementation": "model.Orion14BChatInt4"
+}
