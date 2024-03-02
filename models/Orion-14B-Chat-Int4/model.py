@@ -22,7 +22,8 @@ class Orion14BChatInt4(MLModel):
     async def predict(self, payload: types.InferenceRequest) -> types.InferenceResponse:
         messages = self._parse_request(payload)["messages"]
         response = {
-            "assistant": self.model.chat(self.tokenizer, messages, streaming=False)
+            "role": "assistant",
+            "content": self.model.chat(self.tokenizer, messages, streaming=False)
         }
         response_bytes = json.dumps(response, ensure_ascii=False).encode("UTF-8")
         return types.InferenceResponse(
