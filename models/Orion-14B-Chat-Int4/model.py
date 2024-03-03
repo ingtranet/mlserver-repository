@@ -27,7 +27,6 @@ class Orion14BChatInt4(MLModel):
         disable_progress_bar(); set_verbosity_debug()
         self.tokenizer = AutoTokenizer.from_pretrained(self.MODEL_NAME, use_fast=False, trust_remote_code=True)
         self.model = AutoModelForCausalLM.from_pretrained(self.MODEL_NAME, device_map="auto", torch_dtype=torch.float16, trust_remote_code=True)
-        self.model.generation_config = GenerationConfig.from_pretrained(self.MODEL_NAME)
         return await super().load()
 
     async def predict(self, payload: types.InferenceRequest) -> types.InferenceResponse:
